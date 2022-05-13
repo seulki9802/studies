@@ -1,0 +1,62 @@
+<html>
+<head>
+<title> ::File I/O </title>
+</head>
+
+<body>
+<script type="text/javascript">
+
+function createFile()
+{
+  var txt= document.getElementById("txtInput").value;
+  var fileObject = new ActiveXObject("Scripting.FileSystemObject");
+  fWrite = fileObject.CreateTextFile("C:\\Bitnami\\wampstack-7.4.12-0\\apache2\\htdocs\\SeulKi\\2_test\\write2.txt",true);
+  fWrite.write(txt+"</body></html>");
+  fWrite.close();
+
+  document.getElementById("txtInput").innerHTML="저장되었습니다.show File 버튼을 누르면 확인할 수 있습니다.";
+}
+
+function showFile()
+{
+ var fileName = "C:\\write.txt";
+ var fileObject=new ActiveXObject("Scripting.FileSystemObject");
+
+ if (!fileObject.FileExists(fileName))
+ {
+  alert('만들어진 파일이 없습니다. 파일을 만드신 후 다시 이용하세요');
+ }
+ else
+ {
+  var fOpen=fileObject.OpenTextFile(fileName,1);
+  document.getElementById("txtOutput").innerHTML="";
+
+  while(!fOpen.AtEndOfStream)
+  {
+   document.getElementById("txtOutput").innerHTML+= fOpen.Readline();
+  }
+  fOpen.close();
+ }
+}
+</script>
+
+
+
+<textarea id="txtInput" name="text" rows="6" cols="40">
+이곳에 글을 입력하세요.
+</textarea>
+<br><br>
+
+
+
+<input type="button" value="Create File" onclick="createFile()">
+<input type="button" value="show File" onclick="showFile()">
+
+<br><br>
+
+
+<textarea id="txtOutput" name="text" rows="6" cols="40">
+저장된 글을 보기 위한 곳입니다.
+</textarea>
+</body>
+</html>

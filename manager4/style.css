@@ -1,0 +1,35 @@
+html, body {
+  width: 100%;height: 100%;margin: 0;padding: 0;
+}
+
+div#top{
+  position: relative;
+  /* width: 25.0%; */
+  height: 25.0%;
+  float: top;
+}
+#bottom{
+  position: relative;
+  /* width: 75.0%; */
+  height: 75.0%;
+  float: bottom;
+}
+#right{
+  position: relative;
+  float: right;
+  width: 45.0%;
+}
+#left{
+  position: relative;
+  float: left;
+  width:55.0%;
+}
+#center{
+  position: absolute;
+  top:50%;
+  left:50%;
+  /* background:#cca58f; */
+  transform:translate(-50%, -50%);
+  /* text-align:center; */
+  /* font-size:35px; */
+}

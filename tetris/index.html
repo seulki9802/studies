@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="http://175.124.71.19:98/tetris/style.css">
+  <script src="http://175.124.71.19:98/tetris/tetris.js"></script>
+ </head>
+ <body>
+  <div>
+    <button id="left">left</button>
+    <button id="down">down</button>
+    <button id="right">right</button>
+    <hr>
+  </div>
+  <canvas id="canvas1" width="300", height="600">
+    <script>
+      const canvas = new canvasDrawer("canvas1", "white");
+      canvas.moveBlock();
+      // canvas.test();
+      // canvas.drawBlock(5, 0, 1);
+    </script>
+  </canvas>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!-- python 안거치고 이거로 바로 html 제작 가능 -->
+
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #seulki_map {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+
+</head>
+<body>
+
+            <div class="folium-map" id="seulki_map" ></div>
+
+</body>
+<script>
+    function loadDemo() {
+        if (navigator.geolocation) {
+            alert("Your browser supports geolocation service.");
+            getloc();
+        } else {
+            alert("Your browser doesn't support geolocation service.");
+        }
+    }
+    function getloc() {
+        //navigator.geolocation.getCurrentPosition(updateLocation, handleLocationError);
+        navigator.geolocation.watchPosition(updateLocation, handleLocationError, {maximumAge:2000});
+    }
+    function updateLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var accuracy = position.coords.accuracy;
+        document.getElementById("latitude").innerHTML = latitude;
+        document.getElementById("longitude").innerHTML = longitude;
+        document.getElementById("accuracy").innerHTML = accuracy;
+    }
+    function handleLocationError(error) {
+        switch(error.code) {
+        case error.UNKNOWN_ERROR:
+            alert("unknown error");
+            break;
+        case error.PERMISSION_DENIED:
+            alert("Permission to use Geolocation was denied");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("unavailable");
+            break;
+        case error.TIMEOUT:
+            alert("timeout error");
+            break;
+        }
+    }
+</script>
+<script>
+
+            var seulki_map = L.map(
+                "seulki_map",
+                {
+                    center: [0.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+
+
+
+
+            var tile_layer_5b105f7a5c784ce596635f327446a81a = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(seulki_map);
+
+
+//pin0
+            var pin0 = L.marker(
+                [0.0, 0.0],
+                {}
+            ).addTo(seulki_map);
+
+
+            var pin0_style = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            pin0.setIcon(pin0_style);
+
+
+        var pin0_popup = L.popup({"maxWidth": "100%"});
+
+
+            var pin0_popupSet = $(`<div id="pin0_popupSet" style="width: 100.0%; height: 100.0%;">0</div>`)[0];
+            pin0_popup.setContent(pin0_popupSet);
+
+
+        pin0.bindPopup(pin0_popup)
+        ;
+
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="main.css">
+        </head>
+    <body>
+
+        <div class="alert-box" id="alert">
+            <p id="alert-content">알러트박스</p>
+            <button id="close">X</button>
+        </div>
+        
+        <button onclick="알림창수정('block', '아이디 없어')">버튼1</button>
+        <button onclick="알림창수정('block', '비번 없어')">버튼2</button>
+
+        
+        
+        <script type="text/javascript">
+            
+            document.getElementById('close').addEventListener('click', function(){
+                document.getElementById('alert').style.display = 'none';
+            });
+    
+            function 알림창수정(여닫기, 내용){
+                document.getElementById('alert').style.display = 여닫기;
+                document.getElementById('alert-content').innerHTML = 내용;
+            }
+                
+        </script>
+        
+        
+
+    </body>
+</html>

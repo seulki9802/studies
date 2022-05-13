@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="main.css">
+        </head>
+    <body>
+
+        <button id="button1">버튼1</button>
+        <button id="button2">버튼2</button>
+        
+        <div class="alert-box" id="alert">
+            <p id="alert-content">알러트박스</p>
+            <button id="close">X</button>
+        </div>
+        
+        <script type="text/javascript">
+            
+            document.getElementById('close').addEventListener('click', e=>알림창수정('none'))
+
+            document.getElementById('button1').addEventListener('click', e=>알림창수정('block', '아이디 입력해!'))
+
+            document.getElementById('button2').addEventListener('click', e=>알림창수정('block', '비번 입력해!'))
+
+            function 알림창수정(여닫기, 내용){
+                document.getElementById('alert').style.display = 여닫기;
+                document.getElementById('alert-content').innerHTML = 내용;
+            }
+            
+        </script>
+
+    </body>
+</html>

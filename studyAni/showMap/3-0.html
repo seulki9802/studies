@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
+</head>
+<body>
+    <script>
+        var width = window.innerWidth,
+            height = window.innerHeight,
+            centered,
+            clicked_point;
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("fill", "white")
+            .attr("stroke", "black")
+            .attr("stroke-width", ".2");
+            // .attr("class", "map");
+
+        var projection = d3.geoMercator()
+            .translate([width / 3, height / 1.5]);
+
+        var path = d3.geoPath()
+            .projection(projection);
+
+        var g = svg.append("g");
+
+        queue()
+            .defer(d3.json, "https://unpkg.com/world-atlas@1/world/110m.json" )
+            .await(ready);
+
+        function ready(error, data){
+
+            var features = topojson.feature(data, data.objects.countries).features;
+
+            svg.selectAll("path")
+                .data(features)
+                .enter()
+                .append("path")
+                .attr("d", path);
+
+            const mapInfo = [
+  						{
+    						"name":"서울",
+    						"lat" : "37.532600",
+    						"lon" : "127.024612"
+  						},
+  						{
+    						"name":"대전",
+    						"lat" : "36.3730178",
+    						"lon" : "127.2483736"
+  						}
+						]
+
+            //seoul, daejoun (some infos)
+            svg.selectAll("circle")
+            	.data(mapInfo)
+              .enter()
+              .append("circle")
+            	.attr("cx", d=> projection([d.lon, d.lat])[0])
+              .attr("cy", d=> projection([d.lon, d.lat])[1])
+              .attr("r", 1)
+              .attr("fill", "blue");
+
+						//china (an info)
+          	svg.append("circle")
+            	.attr("cx", projection([49, 60])[0])
+              .attr("cy", projection([49, 60])[1])
+              .attr("r", 3)
+              .attr("fill", "green");
+      	}
+
+    </script>
+</body>
+</html>

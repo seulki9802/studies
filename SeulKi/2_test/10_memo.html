@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+function createFile(){
+  var fs = require('fs');
+  fs.writeFile('C:\\Bitnami\\wampstack-7.4.12-0\\apache2\\htdocs\\SeulKi\\2_test\\test.txt', 'test', function(err){
+    if (err == null){
+      console.log('success');
+    } else {
+      console.log('fail')
+    }
+  });
+}
+</script>
+</head>
+<body>
+  <input type="button" value="Create File" onclick="createFile()">
+</body>
+</html>
